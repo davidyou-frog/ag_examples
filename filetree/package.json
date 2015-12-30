@@ -16,7 +16,13 @@
     "serve-favicon": "^2.0.1"
   },
   "devDependencies": {
-    "jshint": "^2.5.6"
+    "jshint": "^2.5.6",
+    "gulp-loopback-sdk-angular": "^0.1.4",
+    "gulp": "^3.9.0",
+    "gulp-watch": "^4.3.5",
+    "gulp-jshint": "^2.0.0",
+    "gulp-livereload": "^3.8.1",
+    "gulp-nodemon": "^2.0.6"
   },
   "repository": {
     "type": "",
