@@ -1,5 +1,5 @@
 
-var mainApp = angular.module('indexApp',['ui.router','lbServices','mainSub']);
+var mainApp = angular.module('indexApp',['ui.router','lbServices','mainSub','jstreeSub']);
 
 mainApp.config(['$stateProvider', '$urlRouterProvider', 
 function($stateProvider,$urlRouterProvider) {
@@ -25,6 +25,7 @@ function($stateProvider,$urlRouterProvider) {
             },
 	        'jstree-ctrl@main': {
                 templateUrl: 'view/jstree-ctrl.html',
+				controller: 'jstreeCtrl',
             },
 	    }
     }
