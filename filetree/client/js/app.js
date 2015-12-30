@@ -17,11 +17,14 @@ function($stateProvider,$urlRouterProvider) {
 	        'title@main': {
                 templateUrl: 'view/main.title.html',
             },
-	        'tabs@main': {
-                templateUrl: 'view/main.tabs.html',
-            },
 	        'jstree-html@main': {
                 templateUrl: 'view/jstree-html.html',
+            },
+	        'jstree-json@main': {
+                templateUrl: 'view/jstree-json.html',
+            },
+	        'jstree-ctrl@main': {
+                templateUrl: 'view/jstree-ctrl.html',
             },
 	    }
     }

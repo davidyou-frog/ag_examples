@@ -20,6 +20,8 @@ gulp.task('watch', function() {
     livereload.listen();
     gulp.watch('client/*', ['check']);
     gulp.watch('client/js/*', ['check']);
+    gulp.watch('client/js/services/*', ['check']);
+    gulp.watch('client/js/controller/*', ['check']);
     gulp.watch('client/view/*', ['check']);
 });
 
