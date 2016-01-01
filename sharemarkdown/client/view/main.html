@@ -1,0 +1,28 @@
+<section ng-app='mainSub'>
+<h1> Main </h1>
+<div ui-view='title'></div>
+
+<div class="row">
+    <div class="col-md-4">
+      <div class="panel panel-primary">
+        <div class="panel-heading">File Tree</div>
+        <div class="panel-body tree-browser">
+		    <js-tree tree-events="select_node:nodeSelected" tree-ajax="/api/file/tree"></js-tree>
+		 </div>
+      </div>
+    </div>
+    <div class="col-md-8">
+        <div class="panel panel-primary">
+    	    <div class="panel-heading">File Content</div>
+           <div class="panel-body"><pre><code>{{fileContents}}</pre></code></div>
+        </div>
+    </div>
+</div>
+
+<!--
+
+// 
+
+-->
+
+</section>

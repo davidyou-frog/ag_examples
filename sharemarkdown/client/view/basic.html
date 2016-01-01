@@ -1,0 +1,11 @@
+<section ng-app='mainSub'>
+<h1> Main </h1>
+<div ui-view='title'></div>
+<div>
+<uib-tabset>
+   <uib-tab heading="HTML"><div ui-view='jstree-html'></div></uib-tab>
+   <uib-tab heading="JSON"><div ui-view='jstree-json'></div></uib-tab>
+   <uib-tab heading="CTRL"><div ui-view='jstree-ctrl'></div></uib-tab>
+</uib-tabset>
+</div>
+</section>
