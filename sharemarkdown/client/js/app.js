@@ -1,9 +1,16 @@
 
-var mainApp = angular.module('indexApp',['ui.router','lbServices','mainSub','jstreeSub']);
+var mainApp = angular.module('mainApp',
+['ui.router','lbServices','mainSub','formly', 'formlyBootstrap' ]);
+/*
+    ,'ngSanitize'
+    ,'ngResource'
+    ,'angularMoment'
+*/
 
-mainApp.config(['$stateProvider', '$urlRouterProvider', 
-function($stateProvider,$urlRouterProvider) {
+mainApp.config([ '$stateProvider','$urlRouterProvider','LoopBackResourceProvider','$httpProvider',
+function($stateProvider,$urlRouterProvider,LoopBackResourceProvider,$httpProvider) {
 	
+  LoopBackResourceProvider.setUrlBase('http://192.168.10.61:3000/api');
   $urlRouterProvider.otherwise('main');
 	
   $stateProvider
@@ -12,24 +19,39 @@ function($stateProvider,$urlRouterProvider) {
 	    views:{
 			''                : { templateUrl: 'view/main.html'         , controller: 'mainCtrl' },
 	        'title@main'      : { templateUrl: 'view/main.title.html'   },
-	        'jstree-html@main': { templateUrl: 'view/jstree-html.html'  },
-	        'jstree-json@main': { templateUrl: 'view/jstree-json.html'  },
-	        'jstree-ctrl@main': { templateUrl: 'view/jstree-ctrl.html'  , controller:  'jstreeCtrl' },
 	    }
     })
-     .state('basic', {
-		url: '/basic',  
-	    views:{
-			''                : { templateUrl: 'view/basic.html'         , controller: 'basicCtrl' },
-	        'title@basic'      : { templateUrl: 'view/basic.title.html'   },
-	        'jstree-html@basic': { templateUrl: 'view/jstree-html.html'  },
-	        'jstree-json@basic': { templateUrl: 'view/jstree-json.html'  },
-	        'jstree-ctrl@basic': { templateUrl: 'view/jstree-ctrl.html'  , controller:  'jstreeCtrl' },
-	    }
-    }) ;
-  
+    .state('signup', {
+		url: '/signup',
+		templateUrl: 'view/signup.html',
+		controller : 'authCtrl'
+    })
+    .state('signin', {
+		url: '/login',
+		templateUrl: 'view/signin.html',
+		controller : 'authCtrl'
+    })
+    ;
+
+    // Inside app config block
+    $httpProvider.interceptors.push(function($q, $location, LoopBackAuth,$rootScope) {
+        return {
+            responseError: function(rejection) {
+				 console.log( 'rejection.status = ' , rejection.status );
+                 if (rejection.status === 401) {
+                     //Now clearing the loopback values from client browser for safe logout...
+                     LoopBackAuth.clearUser();
+                     LoopBackAuth.clearStorage();
+					 $rootScope.$state.go( 'signin' );
+                 }
+                 return $q.reject(rejection);
+            }
+        };
+    });
+	
 }]);
 
 mainApp.run(function($rootScope){
 	
 });
+

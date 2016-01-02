@@ -1,19 +1,41 @@
 <!DOCTYPE html>
-<html ng-app="indexApp">
+<html ng-app="mainApp">
 <head>
     <meta charset="utf-8"> 
-	<title>File Tree</title>
+	<title>Shared Markdown</title>
 	<link rel="stylesheet" type="text/css" href="lib/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="lib/jstree/dist/themes/default/style.min.css">
 	<link rel="stylesheet" type="text/css" href="css/app.css">
 </head>
-<body  class="container">
- 
-{{"AngularJS is working - top"}}
+<body>
 
+<nav class="navbar navbar-default  navbar-fixed-top" role="navigation" ng-controller="navbarCtrl">
+  <div class="container">
+    <div class="">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/#/"><span class="glyphicon glyphicon-th-large" aria-hidden="true">SM</span></a>
+    </div>
+    <div class="" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav ">
+          <li ng-if="isLoggedin"><a ng-href="#/What">What</a></li>       
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li ng-if="!isLoggedin"><a ng-href="#/login">Login</a></li>
+          <li ng-if="!isLoggedin"><a ng-href="#/signup">Signup</a></li>
+          <li ng-if="isLoggedin"><a href="" ng-click="logout()">Logout {{currentUser.firstName}}</a></li>
+        </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
 	<div ui-view></div>
-
-{{"AngularJS is working - bottom"}}
+</div>
 	
     <script src="/lib/jquery/dist/jquery.min.js"></script>
     <script src="/lib/jstree/dist/jstree.min.js"></script>
@@ -23,15 +45,20 @@
     <script src="/lib/angular-resource/angular-resource.min.js"></script>
     <script src="/lib/angular-ui-router/release/angular-ui-router.min.js"></script>
 	<script src="/lib/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+	
+	<script src="/lib/api-check/dist/api-check.min.js"></script>
+	<script src="/lib/angular-formly/dist/formly.min.js"></script>
+	<script src="/lib/angular-formly-templates-bootstrap/dist/angular-formly-templates-bootstrap.min.js"></script>
   
 	<script src="/lib/jstree-directive/jsTree.directive.js"></script>
 	
 	<script src="/js/services/lb-services.js"></script>
 	<script src="/js/services/file-services.js"></script>
-	<script src="/js/controller/main.js"></script>
-	<script src="/js/controller/basic.js"></script>
-	<script src="/js/controller/jstree.js"></script>
 	<script src="/js/app.js"></script>
+	<script src="/js/services/auth.js"></script>
+	<script src="/js/controller/navbar.js"></script>
+	<script src="/js/controller/auth.js"></script>
+	<script src="/js/controller/main.js"></script>
 
 </body>
 </html>
