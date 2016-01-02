@@ -22,12 +22,12 @@
     </div>
     <div class="" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav ">
-          <li ng-if="isLoggedin"><a ng-href="#/What">What</a></li>       
+          <li ng-if="currentUser"><a ng-href="#/What">What</a></li>       
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li ng-if="!isLoggedin"><a ng-href="#/login">Login</a></li>
-          <li ng-if="!isLoggedin"><a ng-href="#/signup">Signup</a></li>
-          <li ng-if="isLoggedin"><a href="" ng-click="logout()">Logout {{currentUser.firstName}}</a></li>
+          <li ng-if="!currentUser"><a ng-href="#/login">Login</a></li>
+          <li ng-if="!currentUser"><a ng-href="#/signup">Signup</a></li>
+          <li ng-if="currentUser"><a href="" ng-click="logout()">Logout {{currentUser.firstName}}</a></li>
         </ul>
     </div>
   </div>
@@ -57,7 +57,8 @@
 	<script src="/js/app.js"></script>
 	<script src="/js/services/auth.js"></script>
 	<script src="/js/controller/navbar.js"></script>
-	<script src="/js/controller/auth.js"></script>
+	<script src="/js/controller/signup_ctrl.js"></script>
+	<script src="/js/controller/signin_ctrl.js"></script>
 	<script src="/js/controller/main.js"></script>
 
 </body>

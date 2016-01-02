@@ -3,9 +3,22 @@
 <br>
 <div ui-view='title'></div>
 
-isLoggedin = {{isLoggedin}}
+<div ng-if="!currentUser" class="row">
 
-<div class="row">
+    <div class="col-md-6">
+      <div class="panel panel-primary">
+        <div class="panel-heading">File Tree</div>
+        <div class="panel-body tree-browser">
+		 <p>
+            Welcome to Shared Markdown Editor World! <br>
+			 Please Login! 
+        </p>
+		 </div>
+      </div>
+    </div>
+</div>
+
+<div ng-if="currentUser" class="row">
     <div class="col-md-4">
       <div class="panel panel-primary">
         <div class="panel-heading">File Tree</div>
@@ -21,11 +34,5 @@ isLoggedin = {{isLoggedin}}
         </div>
     </div>
 </div>
-
-<!--
-
-// 
-
--->
 
 </section>

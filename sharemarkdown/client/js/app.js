@@ -11,7 +11,7 @@ mainApp.config([ '$stateProvider','$urlRouterProvider','LoopBackResourceProvider
 function($stateProvider,$urlRouterProvider,LoopBackResourceProvider,$httpProvider) {
 	
   LoopBackResourceProvider.setUrlBase('http://192.168.10.61:3000/api');
-  $urlRouterProvider.otherwise('main');
+  
 	
   $stateProvider
     .state('main', {
@@ -24,14 +24,20 @@ function($stateProvider,$urlRouterProvider,LoopBackResourceProvider,$httpProvide
     .state('signup', {
 		url: '/signup',
 		templateUrl: 'view/signup.html',
-		controller : 'authCtrl'
+		controller : 'signupCtrl'
     })
     .state('signin', {
 		url: '/login',
 		templateUrl: 'view/signin.html',
-		controller : 'authCtrl'
+		controller : 'signinCtrl'
     })
+    .state('forbidden', {
+        url: '/forbidden',
+        templateUrl: 'view/forbidden.html',
+      })	
     ;
+	
+	$urlRouterProvider.otherwise('main');
 
     // Inside app config block
     $httpProvider.interceptors.push(function($q, $location, LoopBackAuth,$rootScope) {
@@ -51,7 +57,23 @@ function($stateProvider,$urlRouterProvider,LoopBackResourceProvider,$httpProvide
 	
 }]);
 
-mainApp.run(function($rootScope){
+mainApp.run( ['$rootScope', '$state', function($rootScope,$state){
 	
-});
+    $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+        // redirect to login page if not logged in
+		console.log( 'Event $stateChangeStart' );
+		console.log( '  event = ', event );
+		console.log( '  toState = ', toState );
+		console.log( '  toParams = ', toParams );
+		console.log( '  fromState = ', fromState );
+		console.log( '  fromParams = ', fromParams );
+//		console.log( '  next.authenticate = ', next.authenticate );
+		console.log( '  $rootScope.currentUser = ', $rootScope.currentUser );
+//        if (next.authenticate && !$rootScope.currentUser) {
+//            event.preventDefault(); //prevent current page from loading
+//            $state.go('forbidden');
+//        }
+    });	
+	
+}]);
 

@@ -1,9 +1,8 @@
 var mainSub = angular.module('mainSub',['ui.bootstrap','ui.router','jsTree.directive', 'fileServices'])
 
-mainSub.controller( 'mainCtrl', [ '$scope', 'File', '$rootScope',
-  function($scope,File,$rootScope) {
+mainSub.controller( 'mainCtrl', [ '$scope', 'File', '$rootScope', 'authServices',
+  function($scope,File,$rootScope,authServices) {
 	  
-	  $scope.islogged=$rootScope.islogged;
 	  $scope.fileContents = 'Please select a file to view its contents';
 	  
 	  $scope.nodeSelected = function(e, data) {

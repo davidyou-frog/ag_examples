@@ -8,25 +8,8 @@
  * Controller of the mainApp
  */
 var mainApp = angular.module('mainApp'); 
-mainApp.controller('authCtrl', [ '$scope', 'authServices', function ($scope,authServices) {
+mainApp.controller('signupCtrl', [ '$scope', 'authServices', function ($scope,authServices) {
 
-    $scope.loginFields = [{
-        key: 'email',
-        type: 'input',
-        templateOptions: {
-            required: true,
-            label: 'Email',
-        }
-    },{
-        key: 'password',
-        type: 'input',
-        templateOptions: {
-            type:"password",	
-            required: true,
-            label: 'Password',
-        }
-    }];
-	
   	 $scope.RegisterFields = [
       {
         key: 'firstName',
@@ -60,10 +43,6 @@ mainApp.controller('authCtrl', [ '$scope', 'authServices', function ($scope,auth
       }];
 	
 	  
-  	 $scope.login = function(user){
-  	 	 authServices.login(user);
-  	 };
-	 
      $scope.signup = function(newUser){
          authServices.signup(newUser);
      };
