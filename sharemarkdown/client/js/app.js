@@ -10,9 +10,6 @@ var mainApp = angular.module('mainApp',
 mainApp.config([ '$stateProvider','$urlRouterProvider','LoopBackResourceProvider','$httpProvider',
 function($stateProvider,$urlRouterProvider,LoopBackResourceProvider,$httpProvider) {
 	
-  LoopBackResourceProvider.setUrlBase('http://192.168.10.61:3000/api');
-  
-	
   $stateProvider
     .state('main', {
 		url: '/main',  
