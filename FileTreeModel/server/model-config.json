@@ -31,5 +31,13 @@
   "Role": {
     "dataSource": "db",
     "public": false
+  },
+  "GeneralUser": {
+    "dataSource": "db",
+    "public": true
+  },
+  "FileTree": {
+    "dataSource": "db",
+    "public": true
   }
 }
