@@ -42,7 +42,10 @@ module.exports = function(app) {
   
   app.get('/api/file/tree', function(req, res) {
     var id_path;
-    if (req.query.id == 1) {
+	console.log( 'call get /api/file/tree' );
+	console.log( 'req.query.id = ', req.query.id );
+	
+    if (req.query.id == '#') {
 		
 		id_path = path.resolve(__dirname, '../../', 'node_modules');
 		sendReqWithList(id_path, res);
