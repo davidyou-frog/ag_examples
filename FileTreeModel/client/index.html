@@ -23,8 +23,9 @@
     </div>
     <div class="" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
-          <li ><a href="#/login">Login</a></li>
-          <li ><a href="#/signup">Signup</a></li>
+          <li ng-if="!currentUser"><a ng-href="#/login">Login</a></li>
+          <li ng-if="!currentUser"><a ng-href="#/signup">Signup</a></li>
+          <li ng-if="currentUser"><a href="" ng-click="logout()">Logout {{currentUser.firstName}}</a></li>
         </ul>
     </div>
   </div>
@@ -52,6 +53,9 @@
 <script src="/js/service/lb-services.js"></script>
 
 <script src="/js/app.js"></script>
+<script src="/js/service/auth-services.js"></script>
+<script src="/js/controller/signup_ctrl.js"></script>
+<script src="/js/controller/login_ctrl.js"></script>
 
 	
 </body>
