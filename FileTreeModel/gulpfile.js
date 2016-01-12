@@ -8,7 +8,13 @@ var
 end_require= true;
 
 var livereload_paths = [
-	    'client/index.html',
+	    'client/*.html',
+	    'client/css/*',
+	    'client/img/*',
+	    'client/js/*',
+	    'client/js/**/*',
+	    'client/lib/*',
+	    'client/view/*',
 	];
 
 gulp.task('welcome', function() {
