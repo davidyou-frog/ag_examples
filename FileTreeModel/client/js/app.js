@@ -59,10 +59,12 @@ mainApp.run( ['$rootScope', '$state', 'GeneralUser', function($rootScope, $state
 			$state.transitionTo('before_login');
             event.preventDefault();
 		}
-		
-		localStorage['LastState'] = toState.name;
-
     });
+	
+    $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
+		localStorage['LastState'] = toState.name;
+	});	
+	
 	
 }]);
 
