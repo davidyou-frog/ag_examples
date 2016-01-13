@@ -9,20 +9,27 @@ function($stateProvider,$urlRouterProvider) {
     .state('before_login', {
 		url        : '/before_login',
 		templateUrl: 'view/before_login.html',
+		skipLogin : true
     })
     .state('signup', {
 		url: '/signup',
 		templateUrl: 'view/signup.html',
-		controller : 'signupCtrl'
+		controller : 'signupCtrl',
+		skipLogin : true
     })
     .state('login', {
 		url: '/login',
 		templateUrl: 'view/login.html',
-		controller : 'loginCtrl'
+		controller : 'loginCtrl',
+		skipLogin : true
     })
     .state('main', {
-		url        : '/main',
-		templateUrl: 'view/main.html',
+		url: '/main',  
+	    views:{
+			''                : { templateUrl: 'view/main.html'                                  },
+	        'filetree@main'   : { templateUrl: 'view/filetree.html' , controller: 'filetreeCtrl' }, 
+	    },
+		skipLogin : false
     })
     ;
 	
@@ -31,7 +38,7 @@ function($stateProvider,$urlRouterProvider) {
 }]);
 
 
-mainApp.run( ['$rootScope', function($rootScope){
+mainApp.run( ['$rootScope', '$state', function($rootScope, $state){
 
     $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
         console.log( 'Event $stateChangeStart' );
@@ -40,6 +47,10 @@ mainApp.run( ['$rootScope', function($rootScope){
 		console.log( '  toParams = ', toParams );
 		console.log( '  fromState = ', fromState );
 		console.log( '  fromParams = ', fromParams );
+		if( !$rootScope.currentUser && !toState.skipLogin ){
+			$state.transitionTo('before_login');
+            event.preventDefault();
+		}
     });
 	
 }]);

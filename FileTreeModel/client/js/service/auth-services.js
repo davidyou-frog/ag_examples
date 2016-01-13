@@ -16,8 +16,6 @@ function( GeneralUser, $q, $rootScope, $location , $state ) {
 		
     signup      : function(new_user){
                       GeneralUser.create(new_user).$promise.then(function (user) {
-						  console.log( 'call GeneralUser.create(new_user)' );
-						  console.log( 'user = ', user );
 						  $state.go( 'login' );
                       });
                   },
