@@ -34,7 +34,8 @@ gulp.task('nodemon', function() {
         script: 'server/server.js',
         env: {
             'NODE_ENV': 'development'
-        }
+        },
+		ignore: ["tmpdata/*"],
     })
     .on('restart');
 });

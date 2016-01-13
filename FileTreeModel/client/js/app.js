@@ -38,19 +38,30 @@ function($stateProvider,$urlRouterProvider) {
 }]);
 
 
-mainApp.run( ['$rootScope', '$state', function($rootScope, $state){
+mainApp.run( ['$rootScope', '$state', 'GeneralUser', function($rootScope, $state, GeneralUser ){
 
+	if( GeneralUser.isAuthenticated() ){
+		GeneralUser.getCurrent( function( user ){
+			console.log( 'Callback GeneralUser.getCurrent()' );
+			$rootScope.currentUser = GeneralUser.getCachedCurrent();
+			console.log( '  $rootScope.currentUser ', $rootScope.currentUser );
+			$state.transitionTo(localStorage['LastState']);
+			
+		});
+	}
+	
     $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
         console.log( 'Event $stateChangeStart' );
-		console.log( '  event = ', event );
 		console.log( '  toState = ', toState );
-		console.log( '  toParams = ', toParams );
-		console.log( '  fromState = ', fromState );
-		console.log( '  fromParams = ', fromParams );
+		console.log( '  $rootScope.currentUser ', $rootScope.currentUser );
+		 
 		if( !$rootScope.currentUser && !toState.skipLogin ){
 			$state.transitionTo('before_login');
             event.preventDefault();
 		}
+		
+		localStorage['LastState'] = toState.name;
+
     });
 	
 }]);

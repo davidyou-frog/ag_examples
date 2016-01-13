@@ -15,13 +15,13 @@ function( GeneralUser, $q, $rootScope, $location , $state ) {
     var self ={
 		
     signup      : function(new_user){
-                      GeneralUser.create(new_user).$promise.then(function (user) {
+                      GeneralUser.create(new_user).$promise.then(function (user) {      // 
 						  $state.go( 'login' );
                       });
                   },
 				  
 	login       : function  (user){
-                       GeneralUser.login(user).$promise.then(function(res) {
+                       GeneralUser.login( { rememberMe: false }, user).$promise.then(function(res) { 
 						     $rootScope.currentUser=res.user;
 							 $state.go( 'main' );
                          });
