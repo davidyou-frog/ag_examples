@@ -3,25 +3,25 @@
 
 var mainApp = angular.module('mainApp'); 
 mainApp.controller('filetreeCtrl', 
-[ '$scope','$element','FileTree', 'LoopBackResource', 
-function ($scope,$element,FileTree,Resource) {
+[ '$rootScope','$scope','FileTree', 
+function ($rootScope, $scope,FileTree) {
 
     $scope.title = 'server directory';
 	
     var config = {}; config.core = {};
 	
 	config.core.data = function (node, cb) {
-        console.log( 'call jstree data function' );
-        console.log( 'node = ', node );
 		
 		FileTree.nodes( { id : node.id }).$promise.then(function ( value,responseHeaders) {
-			console.log( 'value = ', value );
 			cb.call(this, value.nodes );
 		} );
 		
 	}
 	
-	this.tree = $( ".filetree" ).jstree(config);
+	this.tree = $( ".filetree" ).jstree(config)
+	.on( "select_node.jstree", function(e, data) {
+		$rootScope.$emit( "filetree:select_node", data );
+	});
 	
 }]);
 	

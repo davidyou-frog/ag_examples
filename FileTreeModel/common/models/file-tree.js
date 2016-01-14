@@ -31,8 +31,6 @@ module.exports = function(FileTree) {
 			node_id = path.resolve(__dirname, '../../', 'node_modules');
 		}
 		
-		console.log( 'node_id = ', node_id  );
-		
 		fs.readdir(node_id, function (err, files) {
 			for (var i = 0; i < files.length;i++) {
                 nodes.push(getNode(node_id, files[i]));
@@ -50,5 +48,27 @@ module.exports = function(FileTree) {
           returns: {arg: 'nodes', type: 'object'}
         }
     );
-  
+	
+    FileTree.file = function( node_id, cb) {
+		
+		var contents = "";
+		
+		console.log( 'node_id = ', node_id  );
+		
+		contents = fs.readFileSync( node_id, 'UTF-8')
+		
+		cb(null, contents );
+
+	}
+	
+    FileTree.remoteMethod (
+        'file',
+        {
+          http: {path: '/file', verb: 'get'},
+          accepts: {arg: 'id', type: 'string',  required: true, http: { source: 'query' } },
+          returns: {arg: 'contents', type: 'string'}
+        }
+    );
+	
 };
+

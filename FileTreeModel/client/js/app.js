@@ -27,8 +27,9 @@ function($stateProvider,$urlRouterProvider,$httpProvider) {
     .state('main', {
 		url: '/main',  
 	    views:{
-			''                : { templateUrl: 'view/main.html'                                  },
-	        'filetree@main'   : { templateUrl: 'view/filetree.html' , controller: 'filetreeCtrl' }, 
+			''                  : { templateUrl: 'view/main.html'                                      },
+	        'filetree@main'     : { templateUrl: 'view/filetree.html'     , controller: 'filetreeCtrl' }, 
+	        'filecontents@main' : { templateUrl: 'view/filecontents.html' , controller: 'filecontentsCtrl' }, 
 	    },
 		skipLogin : false
     })
