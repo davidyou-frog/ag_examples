@@ -14,7 +14,7 @@ function ($scope,$element,FileTree,Resource) {
         console.log( 'call jstree data function' );
         console.log( 'node = ', node );
 		
-		FileTree.nodes( { id : node.id }, function(value,responseHeaders) {
+		FileTree.nodes( { id : node.id }).$promise.then(function ( value,responseHeaders) {
 			console.log( 'value = ', value );
 			cb.call(this, value.nodes );
 		} );

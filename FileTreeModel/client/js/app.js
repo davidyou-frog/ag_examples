@@ -3,8 +3,8 @@
 var mainApp = angular.module('mainApp',
     ['ui.router','lbServices','formly', 'formlyBootstrap']);
 
-mainApp.config([ '$stateProvider','$urlRouterProvider',
-function($stateProvider,$urlRouterProvider) {
+mainApp.config([ '$stateProvider','$urlRouterProvider', '$httpProvider',
+function($stateProvider,$urlRouterProvider,$httpProvider) {
 
   $stateProvider
     .state('before_login', {
@@ -36,6 +36,20 @@ function($stateProvider,$urlRouterProvider) {
 	
 	$urlRouterProvider.otherwise('before_login');
 	
+    $httpProvider.interceptors.push(function($q, $location, LoopBackAuth,$rootScope) {
+        return {
+            responseError: function(rejection) {
+                 if (rejection.status === 401) {
+                     LoopBackAuth.clearUser();
+                     LoopBackAuth.clearStorage();
+					 $rootScope.$state.go( 'before_login' );
+                 }
+                 return $q.reject(rejection);
+            }
+        };
+    });
+	
+	
 }]);
 
 
@@ -46,7 +60,7 @@ mainApp.run( ['$rootScope', '$state', 'GeneralUser', function($rootScope, $state
 			console.log( 'Callback GeneralUser.getCurrent()' );
 			$rootScope.currentUser = GeneralUser.getCachedCurrent();
 			console.log( '  $rootScope.currentUser ', $rootScope.currentUser );
-			$state.transitionTo(localStorage['LastState']);
+			$state.go(localStorage['LastState']); // transitionTo
 			
 		});
 	}
@@ -57,7 +71,7 @@ mainApp.run( ['$rootScope', '$state', 'GeneralUser', function($rootScope, $state
 		console.log( '  $rootScope.currentUser ', $rootScope.currentUser );
 		 
 		if( !$rootScope.currentUser && !toState.skipLogin ){
-			$state.transitionTo('before_login');
+			$state.go('before_login'); // transitionTo
             event.preventDefault();
 		}
     });
@@ -65,7 +79,6 @@ mainApp.run( ['$rootScope', '$state', 'GeneralUser', function($rootScope, $state
     $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
 		localStorage['LastState'] = toState.name;
 	});	
-	
 	
 }]);
 
