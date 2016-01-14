@@ -2650,6 +2650,40 @@ module.factory(
           url: urlBase + "/FileTrees/change-stream",
           method: "POST"
         },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.FileTree#nodes
+         * @methodOf lbServices.FileTree
+         *
+         * @description
+         *
+         * <em>
+         * (The remote method definition does not provide any description.)
+         * </em>
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{string=}` - 
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Data properties:
+         *
+         *  - `nodes` – `{object=}` - 
+         */
+        "nodes": {
+          url: urlBase + "/FileTrees/nodes",
+          method: "GET"
+        },
       }
     );
 

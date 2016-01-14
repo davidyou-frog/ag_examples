@@ -1,6 +1,7 @@
 (function(){
 'use strict';
-var mainApp = angular.module('mainApp',['ui.router','lbServices','formly', 'formlyBootstrap']);
+var mainApp = angular.module('mainApp',
+    ['ui.router','lbServices','formly', 'formlyBootstrap']);
 
 mainApp.config([ '$stateProvider','$urlRouterProvider',
 function($stateProvider,$urlRouterProvider) {
