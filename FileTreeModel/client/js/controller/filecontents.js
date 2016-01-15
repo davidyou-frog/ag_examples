@@ -3,7 +3,7 @@
 
 var mainApp = angular.module('mainApp'); 
 mainApp.controller('filecontentsCtrl', 
-[ '$rootScope', '$scope','$element','FileTree', 'LoopBackResource', 
+[ '$rootScope', '$scope','$element','FileTree', 'LoopBackResource',
 function ($rootScope, $scope,$element,FileTree,Resource) {
 
     $scope.contents = 'no select';

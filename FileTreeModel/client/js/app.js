@@ -1,7 +1,7 @@
 (function(){
 'use strict';
 var mainApp = angular.module('mainApp',
-    ['ui.router','lbServices','formly', 'formlyBootstrap']);
+    ['ui.router','lbServices','formly', 'formlyBootstrap','luegg.directives']);
 
 mainApp.config([ '$stateProvider','$urlRouterProvider', '$httpProvider',
 function($stateProvider,$urlRouterProvider,$httpProvider) {
