@@ -1,6 +1,8 @@
 var path = require('path');
 var fs   = require('fs');
 
+var loopback = require('loopback');
+
 module.exports = function(FileTree) {
 
     function getNode(node_id, filename) {
@@ -27,8 +29,21 @@ module.exports = function(FileTree) {
 		
 		var nodes = [];
 
-		if( node_id === '#' ) { // First Root Query
-			node_id = path.resolve(__dirname, '../../', 'node_modules');
+		if( node_id === '#' ) {
+		
+		    var ctx = loopback.getCurrentContext();
+            var currentUser = ctx && ctx.get('currentUser');
+			var path_name = currentUser.rootPath + currentUser.email;
+			path_name = path_name.replace( /@/gi, "_");
+			
+			path_name = path.resolve( path_name );
+			
+			if ( !fs.existsSync( path_name )) { 
+				 fs.mkdirSync(path_name);
+            } 
+			
+//			node_id = path.resolve(__dirname, '../../', 'node_modules');
+            node_id = path_name;
 		}
 		
 		fs.readdir(node_id, function (err, files) {

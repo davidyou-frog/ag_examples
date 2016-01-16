@@ -5,7 +5,12 @@
   "options": {
     "validateUpsert": true
   },
-  "properties": {},
+  "properties": {
+     "rootPath": {
+        "type" : "string",
+		"default" : "./data/"
+      }
+  },
   "validations": [],
   "relations": {},
   "acls": [],
