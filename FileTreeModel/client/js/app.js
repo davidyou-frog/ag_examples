@@ -1,7 +1,7 @@
 (function(){
 'use strict';
 var mainApp = angular.module('mainApp',
-    ['ui.router','lbServices','formly', 'formlyBootstrap','luegg.directives']);
+    ['ui.router','lbServices','formly', 'formlyBootstrap','luegg.directives', 'jqwidgets','ui.bootstrap' ]);
 
 mainApp.config([ '$stateProvider','$urlRouterProvider', '$httpProvider',
 function($stateProvider,$urlRouterProvider,$httpProvider) {
@@ -27,14 +27,14 @@ function($stateProvider,$urlRouterProvider,$httpProvider) {
     .state('main', {
 		url: '/main',  
 	    views:{
-			''                  : { templateUrl: 'view/main.html'                                      },
-	        'filetree@main'     : { templateUrl: 'view/filetree.html'     , controller: 'filetreeCtrl' }, 
+			''                  : { templateUrl: 'view/main.html'         , controller: 'mainCtrl'         },
+	        'filetree@main'     : { templateUrl: 'view/filetree.html'     , controller: 'filetreeCtrl'     }, 
 	        'filecontents@main' : { templateUrl: 'view/filecontents.html' , controller: 'filecontentsCtrl' }, 
 	    },
 		skipLogin : false
     })
     ;
-	
+
 	$urlRouterProvider.otherwise('before_login');
 	
     $httpProvider.interceptors.push(function($q, $location, LoopBackAuth,$rootScope) {

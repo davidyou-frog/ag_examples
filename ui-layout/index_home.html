@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html ng-app="x">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>UI.Layout</title>
+
+    <!-- Le css -->
+    <link href="http://getbootstrap.com/dist/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="home_src/ui-layout.css"/>
+
+  </head>
+  
+  <body style="height: 100vh;">
+
+<style>  
+.layout-mock *:not(.ui-splitbar){
+  background : #eee no-repeat center;
+}
+ 
+ 
+.layout-mock .center-back{
+  background-image: url("http://placehold.it/400x300/eee/666&text=CENTER");
+}
+.layout-mock .north-back{
+  background-image: url("http://placehold.it/400x300/eee/666&text=NORTH");
+}
+.layout-mock .south-back{
+  background-image: url("http://placehold.it/400x300/eee/666&text=SOUTH");
+}
+.layout-mock .east-back{
+  background-image: url("http://placehold.it/400x300/eee/666&text=EAST");
+}
+.layout-mock .west-back{
+  background-image: url("http://placehold.it/400x300/eee/666&text=WEST");
+}
+</style>    
+  
+  <div ui-layout class="layout-mock">
+  <header class="north-back"> TOP </header>
+  <ui-layout options="{ flow : 'column' }">
+    <sidebar class="east-back"> LEFT </sidebar>
+    <div class="center-back"> CENTER </div>
+    <sidebar class="west-back"> RIGHT </sidebar>
+  </ui-layout>
+  <footer class="south-back"> BOTTOM </footer>
+  </div>
+  
+  
+    <!-- Le javascript -->
+    <script type="application/javascript" src="angular.min.js"></script>
+    <script type="application/javascript" src="home_src/ui-layout.js"></script>
+    <script type="application/javascript">
+
+         angular.module('x', ['ui.layout']);
+
+    </script>
+
+
+  </body>
+</html>

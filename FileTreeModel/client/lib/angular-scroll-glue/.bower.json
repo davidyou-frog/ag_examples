@@ -24,6 +24,5 @@
   },
   "_source": "git://github.com/Luegg/angularjs-scroll-glue.git",
   "_target": "~2.0.6",
-  "_originalSource": "angular-scroll-glue",
-  "_direct": true
+  "_originalSource": "angular-scroll-glue"
 }
