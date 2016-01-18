@@ -6,6 +6,24 @@ mainApp.controller('filecontentsCtrl',
 [ '$rootScope', '$scope','$element','FileTree', 'LoopBackResource',
 function ($rootScope, $scope,$element,FileTree,Resource) {
 
+    $scope.aceLoaded = function(ace_editor){
+		
+		var ace_renderer = ace_editor.renderer;
+		
+		var aceOption = {
+		    showGutter  : true,
+			displayIndentGuides: true,
+			fontSize: 16,
+			hScrollBarAlwaysVisible:true,
+            vScrollBarAlwaysVisible:true,
+			theme: 'ace/theme/terminal',
+			mode: 'ace/mode/javascript',
+		}
+		
+		ace_editor.setOptions( aceOption );
+		
+    };
+
     $scope.contents = 'no select';
 	
 	$rootScope.$on( "filetree:select_node", function( e, data ){ 

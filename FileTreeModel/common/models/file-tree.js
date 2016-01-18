@@ -68,8 +68,6 @@ module.exports = function(FileTree) {
 		
 		var contents = "";
 		
-		console.log( 'node_id = ', node_id  );
-		
 		contents = fs.readFileSync( node_id, 'UTF-8')
 		
 		cb(null, contents );
